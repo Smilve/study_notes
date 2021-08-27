@@ -126,7 +126,7 @@ Kubectl：是k8s的命令行工具，通过这个可以部署、管理应用，�
 > 初始化主节点
 
 ```bash
-kubeadm init --apiserver-advertise-address=192.168.131.130 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.19.4 --service-cidr=10.96.0.0/12 --pod-network-cidr=10.244.0.0/16
+kubeadm init --apiserver-advertise-address=192.168.131.131 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.19.4 --service-cidr=10.96.0.0/12 --pod-network-cidr=10.244.0.0/16
 
 # 主要是 docker拉取 master中的镜像：apiserver、etcd、controllers、scheduler等 和k8s的一些镜像
 
@@ -144,8 +144,8 @@ kubectl get nodes
 删除之后重启如果有问题
 
 ```
-rm $HOME/.kube/config
 kubeadm reset
+rm -rf $HOME/.kube/config
 ```
 
 
@@ -153,7 +153,7 @@ kubeadm reset
 > node节点加入master节点
 
 ```
-kubeadm join 192.168.131.130:6443 --token c2pf8y.zaqs61q1u7xfd4d5 \
+kubeadm join 192.168.131.131:6443 --token c2pf8y.zaqs61q1u7xfd4d5 \
     --discovery-token-ca-cert-hash sha256:c616957357f54aec139dd4dfa1608143c5de70465a8697326df79107073d1f51
     
 ```
@@ -199,7 +199,7 @@ kubectl get pods -n kube-system
 ```bash
 # 新建pod
 kubectl create deployment nginx01 --image=nginx
-# 暴露端口
+# 暴露端口	暴露一个端口相当于新建一个services  使用 kubectl get svc 查看
 kubectl expose deployment nginx --port=80 --type=NodePort
 # 查看pod
 kubectl get pod  # s可有有无
@@ -208,9 +208,131 @@ kubectl get svc		# 也是 kubectl get service	或 services
 # 实际上 最外层是deployment  然后 pod 然后 docker
 # 查看控制器
 kubectl get deployment		# 可以是deploy
+# 删除控制器
+kubectl delete deployment nginx
+kubectl delete pod nginxxxx
 
+# 查看pod详细信息
+kubectl describe pod_name
 # 通过docker ps 及 docker images 可知 pod里面的容器是运行在 node节点上的，master节点不会运行
 ```
 
 ![image-20210825190515984](Kubernetes.assets/image-20210825190515984.png)
+
+
+
+使用k8s部署springboot项目
+
+```bash
+# --dry-run 表示空运行	会生成运行的 yaml文件	k8s是通过yaml文件运行的  这里面下面的 yaml(主要)也可以改成json	k8s支持两种格式
+kubectl create deployment springboot-k8s --image=k8s-jar --dry-run -o yaml
+# 将运行文件写入 deploy.yaml(也叫资源清单)
+kubectl create deployment springboot-k8s --image=k8s-jar --dry-run -o yaml > deploy.yaml
+
+# 通过yaml文件部署项目
+kubectl apply -f boot-deploy.yaml	# 等价于  kubectl create deployment springboot-k8s --image=k8s-jar
+```
+
+注意：boot-deploy.yaml文件设置镜像从本地拉取；
+
+```bash
+containers:
+	- name: k8sjar
+	  image: k8sjar
+	  imagePullPolicy: Never		# 这儿代表从本地拉取镜像
+```
+
+### 安装web管理UI
+
+相当于下载一个镜像，运行在k8s的pod中，对外访问，管理k8s
+
+```bash
+# 直接搭建
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+
+# 分两步
+wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+kubectl apply -f recommended.yaml
+
+# 查看启动是否成功
+kubectl get pod -n kubernetes-dashboard
+# 启动成功浏览器访问
+https://ip:30001/ 
+# 需要使用token登录	生成token
+kubectl create serviceaccount dashboard-admin -n kube-system
+kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin
+kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk '/dashboard-admin/{print $1}')
+
+```
+
+可以修改recommended.yaml暴露的端口
+
+![image-20210827134949710](Kubernetes.assets/image-20210827134949710.png)
+
+### 暴露端口
+
+> NodePort
+
+NodePort服务是在所有节点上开放指定的端口，所有发送到这个端口的请求都会直接转发到服务的pod里面
+
+使用NodePort：在yaml文件中有`type: NodePort`，并使用nodePort指定端口，不知道就会随机一个30000以上的端口
+
+ ![image-20210827135800600](Kubernetes.assets/image-20210827135800600.png)
+
+port：k8s服务之间访问的端口
+
+targetPort：容器的端口
+
+nodePort：外部机器(浏览器)可以访问的端口
+
+
+
+缺点：
+
+* 一个端口只能供一个服务使用
+* 只能使用30000-32767之间的端口
+* 如果节点的IP发生变化，需要人工处理
+
+> LoadBalancer
+
+需要向云平台申请负载均衡器，相当于购买服务，具体如何实现需要看云提供商
+
+> Ingress
+
+![image-20210827140951798](Kubernetes.assets/image-20210827140951798.png)
+
+Ingress相当于一个集群网关，可以自定义路由规则来转发、管理、暴露服务(一组pod)
+
+Ingress不是kubernetes内置的，需要单独安装：Ingress Nginx(官方)
+
+```bash
+# 运行pod
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/baremetal/deploy.yaml
+# 需要改成本地的话 就先下载，修改文件之后再运行
+# 需要修改deploy.yaml中的镜像地址为阿里云的	332行	
+registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:0.33.0
+# 添加一个配置项	329的 hostNetwork: true
+
+kubectl apply -f deploy.yaml
+
+# 查看Ingress状态
+kubectl get service -n ingress-nginx
+kubectl get deploy -n ingress-nginx
+kubectl get pods -n ingress-nginx
+```
+
+创建Ingress访问规则
+
+```bash
+# 类似于网关配置路由规则
+
+# 查看路由配置
+kubectl get ingress   # 或者 ing
+kubectl delete ing name
+
+# 运行
+kubectl apply -f ingress-nginx-rule.yaml
+```
+
+![image-20210827162222855](Kubernetes.assets/image-20210827162222855.png)
 
