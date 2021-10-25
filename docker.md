@@ -75,6 +75,9 @@ docker version
 docker run hello-world
 docker images #查看所有镜像
 
+# 设置docker开机自启
+systemctl enable docker
+
 # 9.卸载docker
 yum remove docker-ce docker-ce-cli containerd.io #卸载依赖
 rm -rf /var/lib/docker
