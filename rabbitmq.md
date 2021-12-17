@@ -85,12 +85,12 @@ master节点除了消息队列之外所有的数据和状态（消息队列中�
 
 ```bash
 # rabbitmq1
-docker run -d -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --hostname rabbitmq2 -p 5672:5672 -p 15672:15672 --name rabbitmq1 rabbitmq:3.7.7-management
+docker run -d -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --hostname rabbitmq1 -p 5672:5672 -p 15672:15672 --name rabbitmq1 rabbitmq:3.7.7-management
 
 # rabbitmq2
 docker run -d -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --hostname rabbitmq2 -p 5673:5672 -p 15673:15672 --name rabbitmq2 --link rabbitmq1:rabbitmq1 rabbitmq:3.7.7-management
 
-# rabbitmq2
+# rabbitmq3
 docker run -d -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --hostname rabbitmq3 -p 5674:5672 -p 15674:15672 --name rabbitmq3 --link rabbitmq1:rabbitmq1 --link rabbitmq2:rabbitmq2 rabbitmq:3.7.7-management
 ```
 

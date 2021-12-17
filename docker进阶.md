@@ -71,6 +71,8 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.5/docker-c
 
 # 授权
 sudo chmod +x /usr/local/bin/docker-compose
+# 创建软链
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 # 验证是否安装成功
 docker-compose --version
 ```

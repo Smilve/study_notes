@@ -543,7 +543,7 @@ docker run -it --name docker02 --volumes-from docker01 lvbo/centos:1.0
 ```
 数据卷容器本事就是几个容器的卷都挂载到同一个本地路径，修改一个容器的内容，其他容器也会同步
 
-多个mysql实现数据共享
+多个mysql实现数据共享(模拟主从同步，其实不是)
 ```bash
 #实现数据共享 将第一个容器变成数据卷容器
 docker run -d -p 4433:3306 --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -v /etc/mysql/conf.d -v /var/lib/mysql  mysql:8.0.13
