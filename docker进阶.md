@@ -288,7 +288,7 @@ docker-compose up --build		# 重新构建
 
 ### 工作模式
 
-![image-20210805180505884](docker进阶.assets/image-20210805180505884.png)
+![image-20210805180505884](images/docker进阶.assets/image-20210805180505884.png)
 
 
 
@@ -326,7 +326,7 @@ docker swarm leave
 
 1. 二主二从，将docker1主机点停止，宕机；对于二主来说，另外一个主节点也不能使用了
 
-![image-20210805184624777](docker进阶.assets/image-20210805184624777.png)
+![image-20210805184624777](images/docker进阶.assets/image-20210805184624777.png)
 
 2. worker节点离开主节点：`docker swarm leave`     会出现down的状态
 3. work就是工作的，管理节点进行操作、执行命令
@@ -349,7 +349,7 @@ for分布式
 
 灰度发布：金丝雀发布
 
-![image-20210806143802816](docker进阶.assets/image-20210806143802816.png)
+![image-20210806143802816](images/docker进阶.assets/image-20210806143802816.png)
 
 ```bash
 docker run  	# 启动容器，不具备扩缩容
@@ -359,7 +359,7 @@ docker service create -p 8888:80 --name my-nginx nginx
 
 查看服务命令：并且服务是随机运行在某个节点的，不一定在本机
 
-![image-20210806144517521](docker进阶.assets/image-20210806144517521.png)
+![image-20210806144517521](images/docker进阶.assets/image-20210806144517521.png)
 
 
 
@@ -394,13 +394,13 @@ docker service scale my-nginx=1					  # 效果一样
 **Task**
 容器内的命令，细节任务
 
-![image-20210806151112393](docker进阶.assets/image-20210806151112393.png)
+![image-20210806151112393](images/docker进阶.assets/image-20210806151112393.png)
 
 命令->管理->api->调度->工作节点(创建Task容器维护创建)
 
 > 服务副本与全局服务
 
-![image-20210806151647950](docker进阶.assets/image-20210806151647950.png)
+![image-20210806151647950](images/docker进阶.assets/image-20210806151647950.png)
 
 管理节点和工作节点都可以跑项目
 

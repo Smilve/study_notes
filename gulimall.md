@@ -4,7 +4,7 @@
 
 > 微服务架构图
 
-![image-20210630105342724](gulimall.assets/image-20210630105342724.png)
+![image-20210630105342724](images/gulimall.assets/image-20210630105342724.png)
 
 谷粒商城就是一个B/C模式的电商平台，销售自营商品给客户。
 
@@ -18,7 +18,7 @@
 
 > 微服务划分图
 
-![image-20210630121743582](gulimall.assets/image-20210630121743582.png)
+![image-20210630121743582](images/gulimall.assets/image-20210630121743582.png)
 
 # 代码实现
 
@@ -165,7 +165,7 @@ new ArrayList<>(Arrays.asList(catIds))
 
 
 
-![image-20210707135610123](gulimall.assets/image-20210707135610123.png)
+![image-20210707135610123](images/gulimall.assets/image-20210707135610123.png)
 
 ### 在多线程下使用ArrayList报错java.util.ConcurrentModificationException
 
@@ -281,7 +281,7 @@ public class GuliFeignConfig {
 }
 ```
 
-![image-20211009152407390](gulimall.assets/image-20211009152407390.png)
+![image-20211009152407390](images/gulimall.assets/image-20211009152407390.png)
 
 ### Feign异步调用丢失请求头
 
@@ -394,7 +394,7 @@ docker update redis01 --restart=always
 
 ## 微服务配置
 
-![image-20210701094910842](gulimall.assets/image-20210701094910842.png)
+![image-20210701094910842](images/gulimall.assets/image-20210701094910842.png)
 
 > SpringCloud Alibaba
 
@@ -457,7 +457,7 @@ SpringCloud Fegin ==> 远程调用
 
 当我们请求到达网关，网关利用断言（Predicate）判定请求是不是符合某个路由规则，如果符合就按路由规则路由到指定地方，去这个指定地方就会经过一系列的过滤器（Filter）进行过滤
 
-![image-20210701233306708](gulimall.assets/image-20210701233306708.png)
+![image-20210701233306708](images/gulimall.assets/image-20210701233306708.png)
 
 
 
@@ -532,7 +532,7 @@ arr = arr.map(item => item * 2)
 
 ### 上传图片文件
 
-![image-20210708100550074](gulimall.assets/image-20210708100550074.png)
+![image-20210708100550074](images/gulimall.assets/image-20210708100550074.png)
 
 # 框架、工具及业务实现
 
@@ -587,17 +587,17 @@ arr = arr.map(item => item * 2)
 
 > JVM内存模型
 
-![image-20210901173445757](gulimall.assets/image-20210901173445757.png)
+![image-20210901173445757](images/gulimall.assets/image-20210901173445757.png)
 
 
 
 优化更多的是在堆这一块
 
-![image-20210901173742971](gulimall.assets/image-20210901173742971.png)
+![image-20210901173742971](images/gulimall.assets/image-20210901173742971.png)
 
 Java8及之后，HotSpot完全将永久代移除，使用元空间(metaspace)代替，可以自己操作物理内存
 
-![image-20210901174520929](gulimall.assets/image-20210901174520929.png)
+![image-20210901174520929](images/gulimall.assets/image-20210901174520929.png)
 
 新对象
 
@@ -621,7 +621,7 @@ jvisualvm:
 
 监控内存泄漏，跟踪垃圾回收，执行时内存情况、cpu分析、线程分析
 
-![image-20210901182222881](gulimall.assets/image-20210901182222881.png)
+![image-20210901182222881](images/gulimall.assets/image-20210901182222881.png)
 
 运行：正在运行的
 
@@ -670,7 +670,7 @@ location /static/ {
 * 即时性、数据一致性要求不高的
 * 访问量大且更新频率不高的数据(读多、写少)
 
-![image-20210907151233090](gulimall.assets/image-20210907151233090.png)
+![image-20210907151233090](images/gulimall.assets/image-20210907151233090.png)
 
 本地缓存可以直接使用Map的数据结构缓存数据，但不适用于分布式系统
 
@@ -766,7 +766,7 @@ public List<CategoryEntity> listWithTree() {
 
 读到的最新数据可能有延迟：最终一致性
 
-![image-20210913173424638](gulimall.assets/image-20210913173424638.png)
+![image-20210913173424638](images/gulimall.assets/image-20210913173424638.png)
 
 解决方案
 
@@ -775,7 +775,7 @@ public List<CategoryEntity> listWithTree() {
 
 > 失效模式
 
-![image-20210913173529955](gulimall.assets/image-20210913173529955.png)
+![image-20210913173529955](images/gulimall.assets/image-20210913173529955.png)
 
 也会产生读脏数据的问题，并且如果数据经常修改的话，就不适合放入缓存；也就是经常修改的数据和实时性较高，就不要走缓存，直接查数据库
 
@@ -798,7 +798,7 @@ public List<CategoryEntity> listWithTree() {
 
 一般在大数据才使用
 
-![image-20210913181840789](gulimall.assets/image-20210913181840789.png)
+![image-20210913181840789](images/gulimall.assets/image-20210913181840789.png)
 
 了解：
 
@@ -961,19 +961,19 @@ public List<CategoryEntity> getDataFromDB(){
 
 > 阶段一
 
-![image-20210908185104668](gulimall.assets/image-20210908185104668.png)
+![image-20210908185104668](images/gulimall.assets/image-20210908185104668.png)
 
 
 
 > 阶段二
 
-![image-20210909145534440](gulimall.assets/image-20210909145534440.png)
+![image-20210909145534440](images/gulimall.assets/image-20210909145534440.png)
 
 设置过期时间和设置占位锁必须是原子操作，不然在执行这两条语句之间的时候发生了断电、宕机等，就会造成死锁
 
 > 阶段三
 
-![image-20210909145906586](gulimall.assets/image-20210909145906586.png)
+![image-20210909145906586](images/gulimall.assets/image-20210909145906586.png)
 
 ```java
 public List<CategoryEntity> getListWithTreeWithRedisLock() {
@@ -1003,7 +1003,7 @@ public List<CategoryEntity> getListWithTreeWithRedisLock() {
 
 > 阶段四
 
-![image-20210909150237301](gulimall.assets/image-20210909150237301.png)
+![image-20210909150237301](images/gulimall.assets/image-20210909150237301.png)
 
 ```java
 public List<CategoryEntity> getListWithTreeWithRedisLock() {
@@ -1033,7 +1033,7 @@ public List<CategoryEntity> getListWithTreeWithRedisLock() {
 
 > 阶段五(最终形态)
 
-![image-20210909151618093](gulimall.assets/image-20210909151618093.png)
+![image-20210909151618093](images/gulimall.assets/image-20210909151618093.png)
 
 ```sh
 # Lua 脚本
@@ -1294,7 +1294,7 @@ System.out.println(futureTask.get());
 
 四大方法
 
-![image-20210918173812523](gulimall.assets/image-20210918173812523.png)
+![image-20210918173812523](images/gulimall.assets/image-20210918173812523.png)
 
 ```java
 // 核心线程数量和最大线程数量一样，不会被回收
@@ -1564,13 +1564,13 @@ QQ、微博、github等网站的用户量非常大，网站为了简化自我网
 
 是一个开放标准，允许用户授权第三方网站并访问他们为服务器提供的信息，而不需要提供账号和密码
 
-![image-20210924105415270](gulimall.assets/image-20210924105415270.png)
+![image-20210924105415270](images/gulimall.assets/image-20210924105415270.png)
 
 授权返回的code只能使用一次，换取回来的token可以使用到过期时间(在一段时间内使用不同的code获取到也是相同的token)
 
 微博：
 
-![image-20210924144729772](gulimall.assets/image-20210924144729772.png)
+![image-20210924144729772](images/gulimall.assets/image-20210924144729772.png)
 
 ```java
 @GetMapping("/weibo/success")
@@ -1696,7 +1696,7 @@ public class GulimallSessionConfig {
 
 原理：装饰者模式
 
-SessionRepositoryFilter.java![image-20210924180748745](gulimall.assets/image-20210924180748745.png)
+SessionRepositoryFilter.java![image-20210924180748745](images/gulimall.assets/image-20210924180748745.png)
 
 SpringSession核心原理
 @EnableRedisHttpSession导入RedisHttpSessionConfiguration配置
@@ -1911,15 +1911,15 @@ public class CartInterceptor implements HandlerInterceptor {
 
 > 串行
 
-![image-20210929162458415](gulimall.assets/image-20210929162458415.png)
+![image-20210929162458415](images/gulimall.assets/image-20210929162458415.png)
 
 > 并行(线程池)
 
-![image-20210929162524610](gulimall.assets/image-20210929162524610.png)
+![image-20210929162524610](images/gulimall.assets/image-20210929162524610.png)
 
 > 消息队列
 
-![image-20210929162547411](gulimall.assets/image-20210929162547411.png)
+![image-20210929162547411](images/gulimall.assets/image-20210929162547411.png)
 
 写入数据库就返回注册成功，并不关心邮件和短信是否发送成功
 
@@ -1927,19 +1927,19 @@ public class CartInterceptor implements HandlerInterceptor {
 
 > 传统场景
 
-![image-20210929162854351](gulimall.assets/image-20210929162854351.png)
+![image-20210929162854351](images/gulimall.assets/image-20210929162854351.png)
 
 当库存系统出现故障后，下订单就会失败
 
 > 消息队列
 
-![image-20210929162905658](gulimall.assets/image-20210929162905658.png)
+![image-20210929162905658](images/gulimall.assets/image-20210929162905658.png)
 
 将下单信息写入消息队列，就算库存系统出现故障，消息队列也能保证消息的可靠投递，不会导致消息丢失
 
 **流量控制(削峰)**
 
-![image-20210929164721051](gulimall.assets/image-20210929164721051.png)
+![image-20210929164721051](images/gulimall.assets/image-20210929164721051.png)
 
 比如说秒杀活动，就算请求很多，系统也可以全部接受，放入消息队列，应用程序只需要按自己最大的处理能力获取订单，达到削峰的作用
 
@@ -1981,7 +1981,7 @@ public class CartInterceptor implements HandlerInterceptor {
 
 RabbitMQ是AMQP的实现
 
-![image-20210929170433656](gulimall.assets/image-20210929170433656.png)
+![image-20210929170433656](images/gulimall.assets/image-20210929170433656.png)
 
 
 
@@ -1999,7 +1999,7 @@ RabbitMQ是AMQP的实现
 * Virtual Host：虚拟主机，表示一批交换器、消息队列和相关对象；虚拟主机共享相同的身份认证和加密环境的独立服务器域；每个vhost本质是一个mini版的RabbitMQ服务器，拥有自己的队列、交换器、绑定和权限机制，RabbitMQ默认的vhost是/
 * Broker：表示消息队列服务器实体
 
-![image-20210929175327548](gulimall.assets/image-20210929175327548.png)
+![image-20210929175327548](images/gulimall.assets/image-20210929175327548.png)
 
 一个Connection多个Channel，相当于高速公路上多条道，
 
@@ -2007,7 +2007,7 @@ vhost可以用于不同环境(java和php)的隔离、也可以用于生产环境
 
 > 测试
 
-![image-20210929183047124](gulimall.assets/image-20210929183047124.png)
+![image-20210929183047124](images/gulimall.assets/image-20210929183047124.png)
 
 > Exchange交换器类型
 
@@ -2055,9 +2055,9 @@ TTL：消息存活时间
 
 可以设置消息的过期时间、也可以设置队列的过期时间(队列里面消息的过期时间)
 
-![image-20211027171509958](gulimall.assets/image-20211027171509958.png)
+![image-20211027171509958](images/gulimall.assets/image-20211027171509958.png)
 
-![image-20211027171521676](gulimall.assets/image-20211027171521676.png)
+![image-20211027171521676](images/gulimall.assets/image-20211027171521676.png)
 
 
 
@@ -2199,13 +2199,13 @@ public class OrderItemServiceImpl{
 * publisher  returnCallback    未投递到queue 退回模式
 * consumer   ack机制
 
-![image-20210930175642155](gulimall.assets/image-20210930175642155.png)
+![image-20210930175642155](images/gulimall.assets/image-20210930175642155.png)
 
 > 确认回调--ConfirmCallback   
 
 spring.rabbitmq.publisher-confirms=true
 
-![image-20211008105932388](gulimall.assets/image-20211008105932388.png)
+![image-20211008105932388](images/gulimall.assets/image-20211008105932388.png)
 
 > 错误回调--returnCallback
 
@@ -2215,7 +2215,7 @@ spring.rabbitmq.publisher-returns=true
 
 spring.rabbitmq.template.mandatory=true
 
-![image-20211008114423382](gulimall.assets/image-20211008114423382.png)
+![image-20211008114423382](images/gulimall.assets/image-20211008114423382.png)
 
 > 可靠抵达--ack(手动确认)
 
@@ -2227,7 +2227,7 @@ spring.rabbitmq.listener.simple.acknowledge-mode=manual
 * basic.nack：用于否定确认，可以指定broker是否丢弃此消息，可以批量
 * basic.reject：用于否定确认，同上，但不能批量
 
-![image-20211008143950434](gulimall.assets/image-20211008143950434.png)
+![image-20211008143950434](images/gulimall.assets/image-20211008143950434.png)
 
 消息可靠抵达配置
 
@@ -2392,11 +2392,11 @@ public void recieveMessage(Message message, OrderReturnReasonEntity orderReturnR
 
 核心流程
 
-![image-20211008173100287](gulimall.assets/image-20211008173100287.png)
+![image-20211008173100287](images/gulimall.assets/image-20211008173100287.png)
 
 订单确认流程
 
-![image-20211011105027215](gulimall.assets/image-20211011105027215.png)	
+![image-20211011105027215](images/gulimall.assets/image-20211011105027215.png)	
 
 ### 接口幂等性处理
 
@@ -2481,7 +2481,7 @@ redis set防重机制：可以计算数据的MD5将其放入redis的set中，处
 
 生成订单业务流程：生成订单---->锁定库存----->扣减积分
 
-![image-20211014161256088](gulimall.assets/image-20211014161256088.png)
+![image-20211014161256088](images/gulimall.assets/image-20211014161256088.png)
 
 3、4会导致数据不一致
 
@@ -2557,7 +2557,7 @@ CAP 原则指的是，中三个要素最多只能同时实现两个，**不可�
 
 柔性事务(遵循BASE理论，最终一致性)
 
-![image-20211015113734464](gulimall.assets/image-20211015113734464.png)
+![image-20211015113734464](images/gulimall.assets/image-20211015113734464.png)
 
 就是把业务分成三部分；把自定义的分支事务纳入全局事务的管理中
 
@@ -2601,7 +2601,7 @@ CAP 原则指的是，中三个要素最多只能同时实现两个，**不可�
 
 管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。		每个微服务自己的事务
 
-![image-20211015134741879](gulimall.assets/image-20211015134741879.png)
+![image-20211015134741879](images/gulimall.assets/image-20211015134741879.png)
 
 #### 使用
 
@@ -2678,11 +2678,11 @@ public class SeataConfig {
 
 五分钟后关闭订单
 
-![image-20211027172359378](gulimall.assets/image-20211027172359378.png)
+![image-20211027172359378](images/gulimall.assets/image-20211027172359378.png)
 
 升级
 
-![image-20211027172648895](gulimall.assets/image-20211027172648895.png)
+![image-20211027172648895](images/gulimall.assets/image-20211027172648895.png)
 
 队列和交换机可以在spring容器中创建，服务一启动就会在rabbitmq中创建队列和交换机(是当连接上rabbitmq上，发现没有这些队列，才会创建队列)
 
@@ -2777,7 +2777,7 @@ public class MQConfig {
 
 库存服务的延时队列和订单类似
 
-![image-20211028094531129](gulimall.assets/image-20211028094531129.png)
+![image-20211028094531129](images/gulimall.assets/image-20211028094531129.png)
 
 
 
@@ -2850,7 +2850,7 @@ public void closeOrder(OrderEntity orderEntity) {
 
 > 流程
 
-![image-20211102163521797](gulimall.assets/image-20211102163521797.png)
+![image-20211102163521797](images/gulimall.assets/image-20211102163521797.png)
 
 ### 定时任务
 
@@ -2948,7 +2948,7 @@ public String startTime(){
 
 ### 秒杀流程
 
-![image-20211111104214891](gulimall.assets/image-20211111104214891.png)
+![image-20211111104214891](images/gulimall.assets/image-20211111104214891.png)
 
 应对超高并发，请求发给秒杀系统，做一系列的判断，获取信号量成功后直接创建订单号，然后只会发一个消息，并不会动任何数据库，速度很快；缺点就是如果订单服务炸了，就不会把订单准备成功，就一直卡到秒杀成功这
 
@@ -2976,7 +2976,7 @@ public String startTime(){
 
 ### Sentinel
 
-![image-20211111170352285](gulimall.assets/image-20211111170352285.png)
+![image-20211111170352285](images/gulimall.assets/image-20211111170352285.png)
 
 [SpringCloud Alibaba-Sentinel文档](https://github.com/alibaba/Sentinel/wiki/%E4%BB%8B%E7%BB%8D)
 
@@ -3023,7 +3023,7 @@ public String startTime(){
 
 #### 限流
 
-![image-20211112103239497](gulimall.assets/image-20211112103239497.png)
+![image-20211112103239497](images/gulimall.assets/image-20211112103239497.png)
 
 集群模式下：单机均摊指每台机器都是这样的阈值；总体阈值指整个集群一共的阈值，通过负载均衡进行分配
 
@@ -3047,7 +3047,7 @@ public String startTime(){
 
 设置在一定规则，请求没达到这个要求就去调用熔断回调(降级处理)，而不调用自己的方法(在请求方法超时获取报错时都会使用)
 
-![image-20211112105921211](gulimall.assets/image-20211112105921211.png)
+![image-20211112105921211](images/gulimall.assets/image-20211112105921211.png)
 
 慢调用比例(RT)：请求的响应时间大于RT时间就为慢调用，以慢调用比例为阀值，大于这个阀值在熔断时长内(时间窗口)就会被熔断；之后会进入探测恢复状态，重新判断比例和阀值
 
@@ -3131,7 +3131,7 @@ docker run --env STORAGE_TYPE=elasticsearch --env ES_HOSTS=192.168.131.131:9200 
 
 只要有这个就代表整合zipkin成功
 
-![image-20211117100136101](gulimall.assets/image-20211117100136101.png)
+![image-20211117100136101](images/gulimall.assets/image-20211117100136101.png)
 
 
 
@@ -3160,7 +3160,7 @@ docker run --env STORAGE_TYPE=elasticsearch --env ES_HOSTS=192.168.131.131:9200 
 
 > 集群基础形式
 
-![image-20211022164142285](gulimall.assets/image-20211022164142285.png)
+![image-20211022164142285](images/gulimall.assets/image-20211022164142285.png)
 
 主从复制：mysql的读写分离(主节点和从节点数据一致，主节点存不下了从节点也存不下)
 
@@ -3178,7 +3178,7 @@ mysql-mmm：双主集群，原理是会将真实数据库节点的ip映射为虚
 
 [尚硅谷mysql集群](https://www.bilibili.com/video/BV1np4y1C7Yf?p=362)
 
-![image-20211025171909340](gulimall.assets/image-20211025171909340.png)
+![image-20211025171909340](images/gulimall.assets/image-20211025171909340.png)
 
 > 搭建mysql集群(主从同步)
 
@@ -3510,7 +3510,7 @@ PUT /blogs/_settings
 }
 ```
 
-![image-20211126113528000](gulimall.assets/image-20211126113528000.png)
+![image-20211126113528000](images/gulimall.assets/image-20211126113528000.png)
 
 #### 应对故障
 
@@ -3532,7 +3532,7 @@ PUT /blogs/_settings
 
 老版本脑裂问题解决，新版本不用
 
-![image-20211126114709388](gulimall.assets/image-20211126114709388.png)
+![image-20211126114709388](images/gulimall.assets/image-20211126114709388.png)
 
 #### 搭建集群
 
@@ -3716,13 +3716,13 @@ k8s就是一个管理和部署集群的东西，其他东西都不管(比如说�
 
 就是一个分布式的编排系统，能管理整个集群
 
-![image-20211011173350433](gulimall.assets/image-20211011173350433.png)
+![image-20211011173350433](images/gulimall.assets/image-20211011173350433.png)
 
-![image-20211011175742271](gulimall.assets/image-20211011175742271.png)
+![image-20211011175742271](images/gulimall.assets/image-20211011175742271.png)
 
-![image-20211011175653183](gulimall.assets/image-20211011175653183.png)
+![image-20211011175653183](images/gulimall.assets/image-20211011175653183.png)
 
-![image-20211011175759891](gulimall.assets/image-20211011175759891.png)
+![image-20211011175759891](images/gulimall.assets/image-20211011175759891.png)
 
 > 架构
 
@@ -3787,7 +3787,7 @@ fluentd
 
 一个pod有一个容器或者多个容器
 
-![image-20211011182809410](gulimall.assets/image-20211011182809410.png)
+![image-20211011182809410](images/gulimall.assets/image-20211011182809410.png)
 
 Container：就是docker启动的容器
 
@@ -3807,7 +3807,7 @@ Pod
 * 必须使用pvc持久化数据(比如说每个mysql节点的数据)
 * 服务集群内访问使用DNS提供的稳定域名
 
-![image-20211129181634986](gulimall.assets/image-20211129181634986.png)
+![image-20211129181634986](images/gulimall.assets/image-20211129181634986.png)
 
 ### k8s部署应用
 
@@ -3815,7 +3815,7 @@ Pod
   * 但是这个不应该我们手动一个一个构建-->下面这一套流程都应该做成自动化部署(项目需要一个Jenkinsfile)
   * deploy配置pod及副本数量等，service统一暴露一个微服务(相当于nginx的负载均衡)
 
-![image-20211201161036510](gulimall.assets/image-20211201161036510.png)
+![image-20211201161036510](images/gulimall.assets/image-20211201161036510.png)
 
 1、为每个项目准备一个Dockerfile，Docker会按照这个文件将项目制作成镜像
 
@@ -3904,7 +3904,7 @@ spec:
 
 对于k8s中使用内部域名访问组件，直接在父模块的pom.xml增加一个profile进行修改即可
 
-![image-20211201172520762](gulimall.assets/image-20211201172520762.png)
+![image-20211201172520762](images/gulimall.assets/image-20211201172520762.png)
 
 
 

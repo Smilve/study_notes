@@ -10,7 +10,7 @@ k8s就是一个管理和部署集群的东西，其他东西都不管(比如说�
 
 ## K8s整体架构
 
-![image-20210817111502094](Kubernetes.assets/image-20210817111502094.png)
+![image-20210817111502094](images/Kubernetes.assets/image-20210817111502094.png)
 
 ### Master
 
@@ -192,7 +192,7 @@ Kubeadm：用于初始化cluster
 
 Kubectl：是k8s的命令行工具，通过这个可以部署、管理应用，查看各种资源、创建、删除和更新组件
 
-![image-20210818163516709](Kubernetes.assets/image-20210818163516709.png)
+![image-20210818163516709](images/Kubernetes.assets/image-20210818163516709.png)
 
 > 初始化主节点
 
@@ -215,7 +215,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 ```
 
-![image-20210820163605569](Kubernetes.assets/image-20210820163605569.png)
+![image-20210820163605569](images/Kubernetes.assets/image-20210820163605569.png)
 
 删除之后重启如果有问题
 
@@ -270,7 +270,7 @@ kubeadm reset  					# node
 
 在master查看节点信息`kubectl get nodes`
 
-![image-20210825172242681](Kubernetes.assets/image-20210825172242681.png)
+![image-20210825172242681](images/Kubernetes.assets/image-20210825172242681.png)
 
 > 在master部署网络插件
 
@@ -291,7 +291,7 @@ kubectl get pods --all-namespaces # 查看pods
 watch kubectl get pod -n kube-system -o wide
 ```
 
-![image-20210825172531374](Kubernetes.assets/image-20210825172531374.png)
+![image-20210825172531374](images/Kubernetes.assets/image-20210825172531374.png)
 
 尚硅谷的`kube-flannel.yml`见附录[1]
 
@@ -353,7 +353,7 @@ kubectl describe pod_name
 # 通过docker ps 及 docker images 可知 pod里面的容器是运行在 node节点上的，master节点不会运行
 ```
 
-![image-20210825190515984](Kubernetes.assets/image-20210825190515984.png)
+![image-20210825190515984](images/Kubernetes.assets/image-20210825190515984.png)
 
 
 
@@ -403,11 +403,11 @@ kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | aw
 
 可以修改recommended.yaml暴露的端口
 
-![image-20210827134949710](Kubernetes.assets/image-20210827134949710.png)
+![image-20210827134949710](images/Kubernetes.assets/image-20210827134949710.png)
 
 ### yaml规则
 
-![image-20211013162403326](Kubernetes.assets/image-20211013162403326.png)
+![image-20211013162403326](images/Kubernetes.assets/image-20211013162403326.png)
 
 之后就是用yml编写配置文件
 
@@ -436,7 +436,7 @@ NodePort服务是在所有节点上开放指定的端口，所有发送到这个
 
 使用NodePort：在yaml文件中有`type: NodePort`，并使用nodePort指定端口，不知道就会随机一个30000以上的端口
 
- ![image-20210827135800600](Kubernetes.assets/image-20210827135800600.png)
+ ![image-20210827135800600](images/Kubernetes.assets/image-20210827135800600.png)
 
 port：k8s服务之间访问的端口
 
@@ -460,7 +460,7 @@ nodePort：外部机器(浏览器)可以访问的端口
 
 尚硅谷的ingress.yaml文件见附录[2]
 
-![image-20210827140951798](Kubernetes.assets/image-20210827140951798.png)
+![image-20210827140951798](images/Kubernetes.assets/image-20210827140951798.png)
 
 Ingress相当于一个集群网关，可以自定义路由规则来转发、管理、暴露服务(一组pod)
 
@@ -530,13 +530,13 @@ spec:
 
 CICD：持续集成(CI)、持续交互(CD)  (主要是机器自动化)
 
-![image-20211020143149651](Kubernetes.assets/image-20211020143149651.png)
+![image-20211020143149651](images/Kubernetes.assets/image-20211020143149651.png)
 
 ## 错误记录
 
 > 当node节点加入master节点时，pod的状态为ContainerCreating
 
-![image-20211013104658968](Kubernetes.assets/image-20211013104658968.png)
+![image-20211013104658968](images/Kubernetes.assets/image-20211013104658968.png)
 
 node节点下载pause镜像即可
 
@@ -607,7 +607,7 @@ spec:
 
 > 部署ingress失败
 
-![image-20211013175308178](Kubernetes.assets/image-20211013175308178.png)
+![image-20211013175308178](images/Kubernetes.assets/image-20211013175308178.png)
 
 ```bash
 # 在node节点pull ingress镜像
