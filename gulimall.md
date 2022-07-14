@@ -1969,7 +1969,7 @@ public class CartInterceptor implements HandlerInterceptor {
 
 > 发布订阅式
 
-在消息被放入topic时，多个接收者(订阅了这个topic的)会同时收到这个消息；类似于b占关注up主，然后up主发视频后，粉丝同时收到消息
+在消息被放入topic时，多个接收者(订阅了这个topic的)会同时收到这个消息；类似于b站关注up主，然后up主发视频后，粉丝同时收到消息
 
 > JMS(Java Message Service)
 
