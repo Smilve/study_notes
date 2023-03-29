@@ -18,7 +18,7 @@
 
 ### 设计模式
 
-> 单例模式
+#### 单例模式
 
 程序运行时，在java虚拟机中只存在该类的一个实例对象。
 
@@ -70,6 +70,137 @@ public class LazyMan {
 ```
 
 查看反射的源码，发现
+
+#### 策略模式
+
+替换多个if else所带来的复杂和难以维护，面向对象，不要多一个渠道或者多一个条件就去修改原来的代码，而是新加一个类来实现新的代码逻辑
+
+优点：算法可以自有切换、避免多重is else判断、扩展性好，面向对象编程、新加条件就新加策略类
+
+缺点：策略类可能会有很多、所有的策略类都需要向外暴露
+
+使用场景：使用多个if else实现不同的算法，在一个系统里面有许多类，它们之间的区别只在于它们的行为，使用策略模式可以动态使一个对象在多个行为中选一个对象
+
+```sql
+public interface Strategy {
+   public int doOperation(int num1, int num2);
+   
+   /**
+   * 每个策略类都有自己的key和desc，可以通过key来获取对应的策略类
+   **/
+   String key();
+
+   String desc();
+}
+
+public enum StrategyEnum {
+
+    ADDSTRATEGY(1, "add"),
+    SUBSTRATEGY(2, "sub"),
+    MULSTRATEGY(3, "mul"),;
+
+    /**
+     * 类型值
+     */
+    @Getter
+    final int type;
+
+    /**
+     * 名字
+     */
+    @Getter
+    final String name;
+
+    StrategyEnum(int type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
+    public static int getStrategyByName(String name){
+
+        Optional<ExportProcessEnum> first = Arrays.stream(StrategyEnum.values()).filter(e -> name.equalsIgnoreCase(e.name)).findAny();
+        if (first.isEmpty()) {
+            return 0;
+        } else {
+            return first.get().getType();
+        }
+    }
+}
+
+
+public class OperationAdd implements Strategy{
+   @Override
+   public int doOperation(int num1, int num2) {
+      return num1 + num2;
+   }
+   
+   @Override
+   public String key(){
+   		StrategyEnum.ADDSTRATEGY.getType();
+   }
+
+	@Override
+   public String desc(){
+   		StrategyEnum.ADDSTRATEGY.getName();
+   }
+}
+public class OperationSubtract implements Strategy{
+   @Override
+   public int doOperation(int num1, int num2) {
+      return num1 - num2;
+   }
+   
+   @Override
+   public String key(){
+   		StrategyEnum.SUBSTRATEGY.getType();
+   }
+
+	@Override
+   public String desc(){
+   		StrategyEnum.SUBSTRATEGY.getName();
+   }
+}
+
+public class OperationMultiply implements Strategy{
+   @Override
+   public int doOperation(int num1, int num2) {
+      return num1 * num2;
+   }
+   
+   @Override
+   public String key(){
+   		StrategyEnum.MULSTRATEGY.getType();
+   }
+
+	@Override
+   public String desc(){
+   		StrategyEnum.MULSTRATEGY.getName();
+   }
+}
+public class TestClass{
+	@Autowired
+    private List<Strategy> strategyList;
+    
+    /**
+     *  获取当前阶段所有的流程
+     * @param metaView  源数据视图名
+     * @param isExportList  是否是列表导出
+     * @return
+     */
+    private Strategy getCurrentStrategy(String name){
+        if (StringUtils.isEmpty(name)){
+            return null;
+        }
+        List<Strategy> strategyList = strategyList.stream().
+                filter(strategy -> name.equals(strategy.getKey())).
+                collect(Collectors.toList());
+        return strategyList.get(0);
+    }
+}
+
+```
+
+
 
 ### Java基础
 
@@ -381,6 +512,10 @@ web模式下
 1. 连接点(joinpoint)：程序的某个特定的位置（如某个方法调用前、某个方法调用后、方法抛出异常后）	
 2. 切点(pointcut)：如果连接点相当于数据中的记录，切点就相当于查询条件，查询需要织入增强方法的某个点，使用注解的时候@Pointcut参数可以放通配符、也可以放注解、通过传参匹配的（后两种一般不建议使用，是动态匹配的，会降低效率）
 3. 增强(advice)：增强就是织入到目标连接点上的某一段程序，也就是动态代理在需要增强的方法上增强的方法
+
+#### SpringBoot的CommandLineRunner的使用
+
+当Spring 容器初始化完成后, Spring会遍历所有实现CommandLineRunner接口的类, 并运行其run() 方法，并且可以通过@component和@Order控制加载顺序，@Order的数值越小越先加载
 
 ### SpringMVC
 

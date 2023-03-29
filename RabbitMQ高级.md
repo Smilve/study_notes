@@ -8,15 +8,15 @@
 
 > 串行
 
-![image-20210929162458415](../gulimall/gulimall.assets/image-20210929162458415.png)
+![image-20210929162458415](images/gulimall.assets/image-20210929162458415.png)
 
 > 并行(线程池)
 
-![image-20210929162524610](../gulimall/gulimall.assets/image-20210929162524610.png)
+![image-20210929162524610](images/gulimall.assets/image-20210929162524610.png)
 
 > 消息队列
 
-![image-20210929162547411](../gulimall/gulimall.assets/image-20210929162547411.png)
+![image-20210929162547411](images/gulimall.assets/image-20210929162547411.png)
 
 写入数据库就返回注册成功，并不关心邮件和短信是否发送成功
 
@@ -24,19 +24,19 @@
 
 > 传统场景
 
-![image-20210929162854351](../gulimall/gulimall.assets/image-20210929162854351.png)
+![image-20210929162854351](images/gulimall.assets/image-20210929162854351.png)
 
 当库存系统出现故障后，下订单就会失败
 
 > 消息队列
 
-![image-20210929162905658](../gulimall/gulimall.assets/image-20210929162905658.png)
+![image-20210929162905658](images/gulimall.assets/image-20210929162905658.png)
 
 将下单信息写入消息队列，就算库存系统出现故障，消息队列也能保证消息的可靠投递，不会导致消息丢失
 
 **流量控制(削峰)**
 
-![image-20210929164721051](../gulimall/gulimall.assets/image-20210929164721051.png)
+![image-20210929164721051](images/gulimall.assets/image-20210929164721051.png)
 
 比如说秒杀活动，就算请求很多，系统也可以全部接受，放入消息队列，应用程序只需要按自己最大的处理能力获取订单，达到削峰的作用
 
@@ -86,7 +86,7 @@
 
 RabbitMQ是AMQP的实现
 
-![image-20210929170433656](../gulimall/gulimall.assets/image-20210929170433656.png)
+![image-20210929170433656](images/gulimall.assets/image-20210929170433656.png)
 
 
 
@@ -104,7 +104,7 @@ RabbitMQ是AMQP的实现
 * Virtual Host：虚拟主机，表示一批交换器、消息队列和相关对象；虚拟主机共享相同的身份认证和加密环境的独立服务器域；每个vhost本质是一个mini版的RabbitMQ服务器，拥有自己的队列、交换器、绑定和权限机制，RabbitMQ默认的vhost是/
 * Broker：表示消息队列服务器实体
 
-![image-20210929175327548](../gulimall/gulimall.assets/image-20210929175327548.png)
+![image-20210929175327548](images/gulimall.assets/image-20210929175327548.png)
 
 一个Connection多个Channel，相当于高速公路上多条道，
 
@@ -112,7 +112,7 @@ vhost可以用于不同环境(java和php)的隔离、也可以用于生产环境
 
 > 测试
 
-![image-20210929183047124](../gulimall/gulimall.assets/image-20210929183047124.png)
+![image-20210929183047124](images/gulimall.assets/image-20210929183047124.png)
 
 #### Exchange交换器类型
 
@@ -188,9 +188,9 @@ TTL：消息存活时间
 
 可以设置消息的过期时间、也可以设置队列的过期时间(队列里面消息的过期时间)
 
-![image-20211027171509958](../gulimall/gulimall.assets/image-20211027171509958.png)
+![image-20211027171509958](images/gulimall.assets/image-20211027171509958.png)
 
-![image-20211027171521676](../gulimall/gulimall.assets/image-20211027171521676.png)
+![image-20211027171521676](images/gulimall.assets/image-20211027171521676.png)
 
 
 
@@ -293,7 +293,7 @@ public class GulimallOrderApplicationTests {
     @Test
     public void createExchange(){
         //  public DirectExchange(String name, boolean durable, boolean autoDelete)
-        //  durable:是否持久化   autoDelete:是否自动删除
+        //  durable:是否持久化   autoDelete:是否自动删除 没有队列和该交换机绑定的时候就会自动删除
         DirectExchange directExchange = new DirectExchange("hello-java-exchange", true, false);
         amqpAdmin.declareExchange(directExchange);
         log.info("Exchange[{}]创建成功","hello-java-exchange");
@@ -339,13 +339,13 @@ public class OrderItemServiceImpl{
 * publisher  returnCallback    未投递到queue 退回模式
 * consumer   ack机制
 
-![image-20210930175642155](../gulimall/gulimall.assets/image-20210930175642155.png)
+![image-20210930175642155](images/gulimall.assets/image-20210930175642155.png)
 
 > 确认回调--ConfirmCallback   
 
 spring.rabbitmq.publisher-confirms=true
 
-![image-20211008105932388](../gulimall/gulimall.assets/image-20211008105932388.png)
+![image-20211008105932388](images/gulimall.assets/image-20211008105932388.png)
 
 > 错误回调--returnCallback
 
@@ -355,7 +355,7 @@ spring.rabbitmq.publisher-returns=true
 
 spring.rabbitmq.template.mandatory=true
 
-![image-20211008114423382](../gulimall/gulimall.assets/image-20211008114423382.png)
+![image-20211008114423382](images/gulimall.assets/image-20211008114423382.png)
 
 > 可靠抵达--ack(手动确认)
 
@@ -367,7 +367,7 @@ spring.rabbitmq.listener.simple.acknowledge-mode=manual
 * basic.nack：用于否定确认，可以指定broker是否丢弃此消息，可以批量
 * basic.reject：用于否定确认，同上，但不能批量
 
-![image-20211008143950434](../gulimall/gulimall.assets/image-20211008143950434.png)
+![image-20211008143950434](images/gulimall.assets/image-20211008143950434.png)
 
 消息可靠抵达配置
 
